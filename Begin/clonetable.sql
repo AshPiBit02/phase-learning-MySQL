@@ -23,3 +23,21 @@ ALTER Table learner AUTO_INCREMENT=101; --auto_increment will start from 101
 TRUNCATE TABLE learner;
 INSERT INTO Learner(name,roll_no) VALUES('Ritwik Dalmia','S100'),('Roshan Singh','S200'),('Mohan Singh','S300');
 SELECT * FROM learner;
+-- #1 Simple Cloning(simple cloning or copying only copies the tables records and domain not the key definitions( primary key, auto_increment ,etc))
+CREATE TABLE LEARNER_COLONE AS SELECT * FROM learner;
+SELECT * FROM learner_colone;
+--Difference can be seen here
+DESC learner;
+DESC learner_colone;
+-- #2 Shallow Cloning (in this method clone table gets the same structure as well as indices (such as primary key,unique key,auto_increment,etc)
+--as the original table preserving constraints but not copies the data )
+CREATE TABLE learner_shallow_clone LIKE learner;--doesn't copy the data
+DESC learner_shallow_clone;
+INSERT INTO learner_shallow_clone SELECT * FROM learner;--inserts all the records of learner into shallow clone
+SELECT * FROM learner_shallow_clone;
+-- #3  Deep Cloning(inherits all the properties of original table including constraints as well as the existin data)
+CREATE TABLE learner_deep_clone LIKE learner;--deep cloning first part
+INSERT INTO learner_deep_clone SELECT * FROM learner;--deep cloning second part
+SELECT * FROM learner_deep_clone;
+
+
