@@ -1,0 +1,14 @@
+--To create database
+-- CREATE DATABASE database_name;
+--To use database
+-- USE database_name;
+--To delete database permanently
+-- DROP DATABASE database_name;
+--To create table
+-- CREATE Table table_name(column 1 datatype constraint ,column2 datatype constraint,...);
+--Example
+-- CREATE Table Student(student int PRIMARY KEY,Name VARCHAR(50) NOT NULL,Subject VARCHAR(50),Year INT,Marks INT);
+--To display all the table created inside the database
+-- SHOW TABLES;
+--To drop a table
+-- DROP Table Student;
