@@ -28,5 +28,13 @@
 --5. MERGE(insert or update in one command)
 -- Syntax: MERGE INTO table T USING source S ON(condition) WHEN MATCHED THEN UPDATE SET.....WHEN NOT MATCHED THEN INSERT...;
 
-
+#TCL(manages transactions)
+--1. COMMIT(saves all changes permanently)
+-- Syntax: COMMIT;
+--2. ROLLBACK(undoes changes)
+-- Syntax:  ROLLBACK;
+--3. SAVEPOINT(creates rollback point)
+-- Syntax: SAVEPOINT savepoint_name;
+--4. SET TRANSACTION(sets transaction rules)
+-- Syntax: SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
