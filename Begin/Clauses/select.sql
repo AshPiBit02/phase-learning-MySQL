@@ -1,0 +1,22 @@
+#The SELECT clause are used to specify which column or expression to retrieve from the dataabase.
+-- i. Selecting specific columns(attributes)
+-- SELECT column1,column2,... FROM table_name;(will return only the given colums)
+-- ii. Selecting all columns
+--  SELECT * FROM table_name;
+-- iii. Alias for columns(keyword as AS can be used to assign an alias to column or expression)
+--  SELECT column1 AS column2,column3 FROM table_name;(will return only the column1 and column3 from the table but column1 will be named as column2)
+-- iv. Select distinct values(keyword 'DISTINCT' is used ot remove duplicate rows from the result set)
+-- SELECT DISTINCT column1,column2,... FROM table_name;
+-- v. Using Expression or calculations(used with expression or calculation such as arithmetic operators or string manipulations)
+--  SELECT column1,column2=column2*1.5 AS new_table_name FROM original_table_name;
+-- vi. Selecting using Aggregate functions(aggregate functions perform a calculation on a set values and return a single result)
+-- a.COUNT(); counts the number of rows that match a specified condition
+--  SELECT COUNT(*) FROM table_name;
+-- b. SUM(); will return the total sum of a numeric column
+-- SELECt SUM(column_name) FROM table_name;
+-- c. AVG(); returns mean of thte values in a numeric column
+-- SELECT AVG(column_name) FROM table_name;
+-- d. MIN(); returns the smallest value in a column
+--  SELECT MIN(column_name) FROM table_name;
+-- e. MAX(); returns the largest value in a column.
+-- SELECT MAX(column_name) FROM table_name;
