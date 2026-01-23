@@ -37,4 +37,9 @@
 -- Syntax: SAVEPOINT savepoint_name;
 --4. SET TRANSACTION(sets transaction rules)
 -- Syntax: SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+#DCL(manages the database system rights and permissions)
+--1. GRANT(used to provid privileges to access or manupulate database)
+-- Syntax: GRANT privilege_type ON table_name TO user/group.
+--2. REVOKE(used to take previlages back from the user)
+-- Syntax: REVOKE privilege_type ON table_name FROM user;
 
