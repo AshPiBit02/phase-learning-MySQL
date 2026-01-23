@@ -20,3 +20,25 @@
 --  SELECT MIN(column_name) FROM table_name;
 -- e. MAX(); returns the largest value in a column.
 -- SELECT MAX(column_name) FROM table_name;
+
+--   Implementations ---
+CREATE TABLE Customers(CustomerID INT PRIMARY KEY AUTO_INCREMENT,FirstName VARCHAR(20),LastName VARCHAR(20),Age INT ,City VARCHAR(20),PurchaseAmount DECIMAL(10,2));
+INSERT INTO Customers(FirstName,LastName,Age,City,PurchaseAmount) VALUES ('Alice','Smith',30,'Pokhara',2500),
+('Bob','Johnson',25,'Kathmandu',1800),('Charlie','Lee',32,'Pokhara',2500),
+('Diana','Patel',22,'Biratnagar',3000),('Alice','Smith',30,'Pokhara',2500);
+-- Selecting specific columns(FirstName and City)
+SELECT FirstName,City FROM Customers;
+-- Selecting all columns
+SELECT * FROM Customers;
+-- Using Aliases
+SELECT FirstName AS NAME, PurchaseAmount AS AmountSpent FROM customers;
+-- Using Expressions or Calculations
+SELECT FirstName,PurchaseAmount+500 AS AdjustedAmount FROM customers;
+-- Selecting DISTINCT Values
+SELECT DISTINCT FirstName,LastName,Age,City,PurchaseAmount FROM customers;
+--Using Aggregate functions
+SELECT COUNT(*) FROM customers;
+SELECT COUNT(*) AS PokharaCustomrs FROM customers WHERE City='Pokhara';
+SELECT COUNT(DISTINCT City) AS DistinctCities FROM Customers;
+UPDATE customers SET Age=32 WHERE CustomerID=2;--Bob's age will become 32 and below query will return 1
+SELECT COUNT(DISTINCT City) AS DistinctCities FROM Customers WHERE Age>30;
