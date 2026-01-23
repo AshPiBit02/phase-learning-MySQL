@@ -1,0 +1,11 @@
+#RENAME(renaming is done for columns, tables or derived results to make then easier to understand or work with)
+-- i. Renaming table(using AS)
+--    SELECT column1,column2,... FROM table_name AS new_table_name;
+-- ii. Renaming columns(using AS)
+--    SELECT column_name AS new_column_name ,columns... FROM table_name;
+-- iii.  Renaming derived columns or tables(using AS)
+--   SELECT column1, column2,column2+(something) AS new_column2 FROM table_name;
+-- iv. Renaming a table permanently 
+--   ALTER TABLE table_name RENAME table_name TO new_table_name;
+-- v. Renaming a column permanently
+--   ALTER TABLE table_name RENAME COLUMN column_name TO new_name;

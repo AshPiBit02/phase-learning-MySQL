@@ -42,3 +42,4 @@ SELECT COUNT(*) AS PokharaCustomrs FROM customers WHERE City='Pokhara';
 SELECT COUNT(DISTINCT City) AS DistinctCities FROM Customers;
 UPDATE customers SET Age=32 WHERE CustomerID=2;--Bob's age will become 32 and below query will return 1
 SELECT COUNT(DISTINCT City) AS DistinctCities FROM Customers WHERE Age>30;
+
