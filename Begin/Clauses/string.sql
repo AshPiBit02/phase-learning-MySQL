@@ -37,8 +37,8 @@ CREATE TABLE Users (
     city VARCHAR(50)
 );
 INSERT INTO users VALUES(1,'Alice Sharma','alice@gmail.com','Pokhara'),
-(2,'Bob Thapa','bob_thapa@yahoo.cpm','Kathmandu'),(3,'Charlie Gurung','charlie@outlook.com','Pokhara'),
-(4,'Diana Karki','diana.karki@gmail.com','Biratnagar')
+(2,'Bob Thapa','bob_thapa@yahoo.com','Kathmandu'),(3,'Charlie Gurung','charlie@outlook.com','Pokhara'),
+(4,'Diana Karki','dianakarki@gmail.com','Biratnagar');
 -- find the number of characters in each user's full_name;
 SELECT LENGTH(full_name) FROM users; 
 -- combine full_name and email into one string called contactInFo
@@ -59,4 +59,32 @@ SELECT full_name FROM users WHERE full_name LIKE 'D%';
 SELECT full_name,email FROM users WHERE email LIKE '%@gmail%';
 -- USE (_) to find users whose email has exactly one character before @
 SELECT full_name,email FROM users WHERE email LIKE '_@';
+-- Exract the first 5 characters of full_name,convert then to uppercase and filters only users whose email contains outlook
+SELECT full_name,UPPER(SUBSTRING(full_name,1,5)) AS short_name,email FROM users WHERE email LIKE '%outlook%';
+-- find all users whose full_name length is greater than 10 charaters
+SELECT full_name FROM users WHERE LENGTH(full_name)>10;
+-- Create a new column that shows "Name(City)" for each user.
+SELECT user_id,email,CONCAT(full_name,'(',city,')') AS name_city FROM users;
+-- extract the first 3 letter of each city
+SELECT city,SUBSTRING(city,1,3) AS short_city FROM users;
+-- Extract everything after @ in the email
+SELECT email,SUBSTRING(email,LOCATE('@',email)+1) AS full_domain FROM users;
+-- Extract only the top_level domain(like com)
+SELECT email,SUBSTRING(email,LOCATE('.',email)+1) AS full_domain FROM users;
+-- convert city name to uppercase and order then alphabetically
+SELECT full_name,UPPER(city) AS city_upper FROM USERS ORDER BY city_upper ASC;
+INSERT INTO users VALUES(5,'Juj knight','juj_knight@gmail.com','Chandrapur');
+-- Find users whose email contains an underscore(_)
+SELECT full_name,email FROM USERS WHERE email LIKE '%\_%'; -- / tells SQL treat the next 
+-- character as literal(must contain a value ), not special, if we don't use \ it will return all the 
+--+email since % can be zero and _ says any one charater
+-- 
+-- Display the first 4 characters of full_name in uppercase, followed by the domain of their email
+SELECT full_name,email,CONCAT(UPPER(SUBSTRING(full_name,1,4)),SUBSTRING(email,LOCATE('@',email)+1)) AS name_domain FROM users;
+-- FInd all users whose full_name length is greater than 5 and whose email contains gmail
+SELECT full_name,email FROM users WHERE LENGTH(full_name)>5 AND email LIKE '%gmail%';
+-- Show "CITY: Full_name" for all users, but only if their city start with B
+SELECT CONCAT(UPPER(city),': ',full_name) AS city_user FROM users WHERE city LIKE "B%";
+
+
 
