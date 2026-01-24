@@ -12,8 +12,6 @@
 -- v. LOCATE(): search for a substring and returns the position of the substring
 --  LOCATE(substring,string,start);search substring in string from given start 
 --  LOCATE(substring,string);search for substring in sting from the starting first position of the string.
-
-
 -- PATTER MATCHING IN STRING(is typically using the 'LIKE' along with wildcard characters
 --  to search for specific pattern in the string data)
 -- i. Percent(%): represent zero or more charaters
@@ -46,11 +44,19 @@ SELECT LENGTH(full_name) FROM users;
 -- combine full_name and email into one string called contactInFo
 SELECT CONCAT(full_name,email) AS ContactInfo FROM users;
 -- Extract the domain name(e.g. gmail,yahoo) from each user's email.
-
-
+SElECT full_name,SUBSTRING(email,LOCATE('@',email)+1,
+       LOCATE('.',email,LOCATE('@',email))-LOCATE('@',email)-1)
+        AS domain_name FROM Users;
 -- covert all city names to uppercase.
 SELECT UPPER(city) FROM users;
 --cover all full_name values to lowercase
 SELECT LOWER(full_name) FROM users;
 -- find the users whose email ends with gmail.com
 SELECT full_name FROM Users WHERE email LIKE '%gmail.com';
+-- find the users whose full_name starts with D
+SELECT full_name FROM users WHERE full_name LIKE 'D%';
+-- Use % to find whose email contains @gmail.
+SELECT full_name,email FROM users WHERE email LIKE '%@gmail%';
+-- USE (_) to find users whose email has exactly one character before @
+SELECT full_name,email FROM users WHERE email LIKE '_@';
+
