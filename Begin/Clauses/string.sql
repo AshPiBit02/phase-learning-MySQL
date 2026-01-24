@@ -9,6 +9,10 @@
 -- iv. UPPER() and LOWER(): converts upper to lower case and lower to uppercase
 --   SELECT UPPER(string);
 --   SELECT LOWER(string);
+-- v. LOCATE(): search for a substring and returns the position of the substring
+--  LOCATE(substring,string,start);search substring in string from given start 
+--  LOCATE(substring,string);search for substring in sting from the starting first position of the string.
+
 
 -- PATTER MATCHING IN STRING(is typically using the 'LIKE' along with wildcard characters
 --  to search for specific pattern in the string data)
@@ -27,3 +31,26 @@
 -- and conatins any single charater at start
 -- SELECT column FROM table_name WHERE column LIKE 'x_'; will match any values in column that starts with x ,
 -- and conatins any single charater at end
+
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY,
+    full_name VARCHAR(20),
+    email VARCHAR(40),
+    city VARCHAR(50)
+);
+INSERT INTO users VALUES(1,'Alice Sharma','alice@gmail.com','Pokhara'),
+(2,'Bob Thapa','bob_thapa@yahoo.cpm','Kathmandu'),(3,'Charlie Gurung','charlie@outlook.com','Pokhara'),
+(4,'Diana Karki','diana.karki@gmail.com','Biratnagar')
+-- find the number of characters in each user's full_name;
+SELECT LENGTH(full_name) FROM users; 
+-- combine full_name and email into one string called contactInFo
+SELECT CONCAT(full_name,email) AS ContactInfo FROM users;
+-- Extract the domain name(e.g. gmail,yahoo) from each user's email.
+
+
+-- covert all city names to uppercase.
+SELECT UPPER(city) FROM users;
+--cover all full_name values to lowercase
+SELECT LOWER(full_name) FROM users;
+-- find the users whose email ends with gmail.com
+SELECT full_name FROM Users WHERE email LIKE '%gmail.com';
