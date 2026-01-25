@@ -37,4 +37,7 @@ SELECT reg_code,person_tag FROM citizenregistry WHERE years_old>25 AND
  township LIKE 'T%' AND  NOT (mail_handle LIKE '%gmail.com');
  -- create a column that shows "CODE:person_tage" for all citizens, but only if their age is less than 30;
  SELECT CONCAT(reg_code,':',person_tag) AS code_person_tag FROM citizenregistry WHERE years_old<30;
+ -- Mask the email so only the first 3 characters of mail_handle are shown followed by ***
+ SELECT CONCAT(SUBSTRING(mail_handle,1,3),'***',SUBSTRING(mail_handle,LOCATE('@',mail_handle))) 
+ AS masked_email FROM citizenregistry;
  
