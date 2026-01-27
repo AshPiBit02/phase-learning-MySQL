@@ -74,5 +74,8 @@ SELECT emp_id,emp_name FROM employeelog WHERE RIGHT(emp_name,1)=(SELECT RIGHT(em
   -- Find employees whose names contain the same first two letters as the employee with the maximun salary
   SELECT emp_id,emp_name,salary FROM employeelog WHERE emp_name LIKE (SELECT CONCAT(SUBSTRING(emp_name,1,2),'%')
   FROM employeelog WHERE salary=(SELECT MAX(salary) FROM employeelog));
-  
+  -- List departments where the number of employees with names starting with 'S' exceeds the number of employees in HR.
+  SELECT department,COUNT(*) AS emp_count FROM employeelog WHERE emp_name LIKE 'S%' GROUP BY 
+  department HAVING COUNT(*)>(SELECT COUNT(*) FROM employeelog WHERE department='HR');
+
 
