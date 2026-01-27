@@ -33,4 +33,46 @@ employeelog WHERE emp_name='Sita Bhandari');
 -- Find department where the average salary is greater than the average salary salary of HR department
 SELECT department,AVG(salary) AS avg_dept_salary FROM employeelog GROUP BY department
 HAVING AVG(salary)>(SELECT AVG(salary) FROM employeelog WHERE department='HR');
+--List employees whose city is the name as the city of the highest-paid employee.
+SELECT emp_id,emp_name,salary,city FROM employeelog WHERE city=(SELECT city
+ FROM employeelog WHERE salary=(SELECT MAX(salary) FROM employeelog));
+ -- Show employees whose salary is greater than the salary of at least one Finance employee
+ SELECT emp_name,salary FROM employeelog WHERE salary>(SELECT MIN(salary) 
+ FROM employeelog WHERE department='Finance');
+-- Find employees whose salary is less than all salaries in IT department
+SELECT emp_id,emp_name,department,salary FROM employeelog WHERE salary<(SELECT MIN(salary)
+FROM employeelog WHERE department='IT');
+-- Display departments where the number of employees exceeds the number of employees in HR
+SELECT department, COUNT(*) AS emp_count FROM employeelog GROUP BY department HAVING COUNT(*)>
+(SELECT COUNT(*) FROM employeelog WHERE department='HR');
+-- List employees whose names start with the same letter as the employee with the lowest salary
+SELECT emp_id,emp_name,department,salary FROM employeelog WHERE
+ LEFT(emp_name,1)=(SELECT LEFT(emp_name,1) FROM employeelog WHERE 
+ salary=(SELECT MIN(salary) FROM employeelog));
+ -- Find employees whose names contain the same substring as the highest-paid employee's name
+ SELECT emp_id,emp_name,department,salary FROM employeelog WHERE
+  emp_name LIKE (SELECT CONCAT('%',SUBSTRING(emp_name,1,3),'%') FROM employeelog 
+  WHERE salary=(SELECT MAX(salary) FROM employeelog));
+  -- List employees whose names are longer than the average length of names in the HR department
+  SELECT emp_name,LENGTH(emp_name) AS name_length FROM employeelog WHERE
+   LENGTH(emp_name)>(SELECT AVG(LENGTH(emp_name)) FROM employeelog WHERE department='HR');
+-- show employees whose names end with the same last letter as the lowest-paid employee's name
+SELECT emp_id,emp_name FROM employeelog WHERE RIGHT(emp_name,1)=(SELECT RIGHT(emp_name,1)
+ FROM employeelog WHERE salary=(SELECT MIN(salary) FROM employeelog));
+ -- Display employees whose names are alphabetically greater than the name of the earliest hired employee
+ SELECT emp_id,emp_name FROM employeelog WHERE emp_name>(SELECT emp_name 
+ FROM employeelog WHERE hire_date=(SELECT MIN(hire_date) FROM employeelog)) ;
+ -- Find departments where the average salary is greater than the average salary of employees whose names start with 'A'
+ SELECT department,AVG(salary) AS avg_dept_salary FROM employeelog GROUP BY department
+ HAVING AVG(salary)>(SELECT AVG(salary) FROM employeelog WHERE emp_name LIKE 'A%') ;
+ -- List empolyees whose city name length is greater than the average city name length across all employees.
+ SELECT emp_id,emp_name,city, LENGTH(city) AS city_len FROM employeelog
+  WHERE LENGTH(city)>(SELECT AVG(LENGTH(city)) FROM employeelog);
+  -- Show employees whose names, when converted to uppercase, match the uppercase version of the lowest-paid employee's name
+  SELECT emp_id,emp_name,salary FROM employeelog WHERE UPPER(emp_name)=(SELECT UPPER(emp_name) FROM 
+  employeelog WHERE salary=(SELECT MIN(salary) FROM employeelog));
+  -- Find employees whose names contain the same first two letters as the employee with the maximun salary
+  SELECT emp_id,emp_name,salary FROM employeelog WHERE emp_name LIKE (SELECT CONCAT(SUBSTRING(emp_name,1,2),'%')
+  FROM employeelog WHERE salary=(SELECT MAX(salary) FROM employeelog));
+  
 
