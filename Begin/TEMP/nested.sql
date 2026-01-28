@@ -80,4 +80,25 @@ SELECT emp_id,emp_name FROM employeelog WHERE RIGHT(emp_name,1)=(SELECT RIGHT(em
 # Correlated Subqueries(a type of subquery where the inner query depends on the outer query)
 -- Syntax: SELECT outer_column FROM outer_table WHERE outer_column=(SELECT inner_column FROM inner_table WHERE
 --         inner_coldition AND outer_column = inner_column);
-
+-- List employees whose salay is greater  than the average salary of their own department
+SELECT e.emp_id,e.emp_name,e.salary,e.department FROM employeelog e
+ WHERE e.salary>(SELECT AVG(salary) FROM employeelog WHERE department=e.department);
+ -- show employees whose name length is greater than the average name length of their department
+ SELECT e.emp_name,e.department,LENGTH(e.emp_name) AS name_len FROM employeelog e WHERE LENGTH(e.emp_name)>(SELECT
+  AVG(LENGTH(emp_name)) FROM employeelog WHERE department=e.department );
+-- Find employees who where hired after the earliest hire date in their department.
+SELECT e.emp_id,e.emp_name,e.department,e.hire_date FROM employeelog e WHERE 
+e.hire_date>(SELECT MIN(hire_date) FROM employeelog WHERE department=e.department);
+-- Display employees whose names start with the same first letter as the lowest-paid employee in their department.
+SELECT e.emp_id,e.emp_name,e.department FROM employeelog e WHERE LEFT(e.emp_name,1)=(SELECT LEFT(emp_name,1) FROM employeelog
+WHERE department=e.department AND 
+salary=(SELECT MIN(salary) FROM employeelog WHERE department=e.department));
+-- List employees who live in city where the number of employees exceeds the number of employees in their department.
+SELECT e.emp_id,e.emp_name,e.city FROM employeelog e WHERE (SELECT COUNT(*) FROM employeelog 
+WHERE city=e.city)>(SELECT COUNT(*) FROM employee WHERE department=e.department);
+-- Show employees whose salary is equal to the maximum salary in their department.
+SELECT e.emp_id,e.emp_name,e.department,e.salary FROM employeelog e WHERE 
+e.salary=(SELECT MAX(salary) FROM employeelog WHERE department=e.department);
+-- Find employees whose uppercase name matches the uppercase version of the shortest name in their department.
+SELECT e.emp_id,e.emp_name,e.department FROM employeelog e WHERE UPPER(e.emp_name)=(SELECT UPPER(emp_name) 
+FROM employeelog WHERE department=e.department ORDER BY LENGTH(emp_name) ASC LIMIT 1);
