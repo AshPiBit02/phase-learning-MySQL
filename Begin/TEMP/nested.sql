@@ -102,3 +102,22 @@ e.salary=(SELECT MAX(salary) FROM employeelog WHERE department=e.department);
 -- Find employees whose uppercase name matches the uppercase version of the shortest name in their department.
 SELECT e.emp_id,e.emp_name,e.department FROM employeelog e WHERE UPPER(e.emp_name)=(SELECT UPPER(emp_name) 
 FROM employeelog WHERE department=e.department ORDER BY LENGTH(emp_name) ASC LIMIT 1);
+-- list employees whose salary is greater than the median salary of their department
+SELECT e.emp_id,e.emp_name,e.department,e.salary FROM employeelog e WHERE (SELECT COUNT(*) FROM employeelog WHERE department=e.department AND salary<e.salary)
+>(SELECT COUNT(*) FROM employeelog WHERE department=e.department AND salary>e.salary);
+-- Find employees whose hire date is earlier than the averge hire date of their department
+SELECT e.emp_id,e.emp_name,e.salary,e.department,e.hire_date FROM employeelog e 
+WHERE e.hire_date<(SELECT AVG(hire_date) FROM employeelog WHERE department=e.department);
+-- list employees whose name length is equal to the maximum name length in their department
+SELECT e.emp_name,e.department,LENGTH(e.emp_name)AS name_len FROM employeelog e WHERE 
+LENGTH(e.emp_name)=(SELECT LENGTH(emp_name) FROM employeelog WHERE department=e.department ORDER BY LENGTH(emp_name) DESC LIMIT 1);
+-- find employees whose salary is greater than the average salary fo employees living in the same city
+SELECT e.emp_id,e.emp_name,e.salary,e.city FROM employeelog e WHERE e.salary>(SELECT AVG(salary) FROM employeelog WHERE city=e.city);
+-- List employees whose salary is greater than the average salary of employees in all other department
+SELECT e.emp_id,e.emp_name,e.salary,e.department FROM employeelog e WHERE e.salary>(SELECT AVG(salary) 
+FROM employeelog WHERE department<>e.department);-- <> AND != both are same
+-- List employees whose salary is greater than the average salary across the entire company
+SELECT * FROM employeelog WHERE salary>(SELECT AVG(salary) FROM employeelog );
+-- Find employees who live in a city where the number of employees in that city is greater than the number of employees in their department
+SELECT e.emp_id,e.emp_name,e.city,e.department FROM employeelog e WHERE (SELECT COUNT(*)
+ FROM employeelog WHERE city=e.city)>(SELECT COUNT(*) FROM employeelog WHERE department=e.department);
