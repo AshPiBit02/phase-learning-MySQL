@@ -77,5 +77,7 @@ SELECT emp_id,emp_name FROM employeelog WHERE RIGHT(emp_name,1)=(SELECT RIGHT(em
   -- List departments where the number of employees with names starting with 'S' exceeds the number of employees in HR.
   SELECT department,COUNT(*) AS emp_count FROM employeelog WHERE emp_name LIKE 'S%' GROUP BY 
   department HAVING COUNT(*)>(SELECT COUNT(*) FROM employeelog WHERE department='HR');
-
+# Correlated Subqueries(a type of subquery where the inner query depends on the outer query)
+-- Syntax: SELECT outer_column FROM outer_table WHERE outer_column=(SELECT inner_column FROM inner_table WHERE
+--         inner_coldition AND outer_column = inner_column);
 
