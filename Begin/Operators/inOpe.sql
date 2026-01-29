@@ -40,4 +40,19 @@ SELECT emp_id,emp_name,department,project FROM projectlog WHERE project
  -- Show employees whose names are in the set ('Sita Bhandari','Dipesh KC','Maya Gurung')
  SELECT emp_id,emp_name,department, city FROM projectlog WHERE emp_name IN
   ('Sita Bhandari','Dipesh KC','Maya Gurung');
-  
+-- List employees whose city is among cities where finance employees live but not HR Employees 
+SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN (SELECT DISTINCT city
+ FROM projectlog WHERE department IN ('Finance')) AND city NOT IN (SELECT DISTINCT city 
+ FROM projectlog WHERE department IN ('HR'));
+ -- Show employees whose salary is among the top 3 highest salaries in the table
+ SELECT emp_id,emp_name,department,salary FROM projectlog WHERE salary IN 
+ (SELECT DISTINCT salary FROM projectlog ORDER BY salary DESC LIMIT 3 );-- Works on latest versions 
+ -- Find employees whose department is among departments that have employees in kathmandu
+ SELECT emp_id,emp_name,department,city FROM projectlog WHERE department 
+ IN (SELECT DISTINCT department FROM projectlog WHERE city IN ('Kathmandu')); 
+ -- List employees whose project is among projects assigned to employees earning more than 60,000.
+ SELECT emp_id,emp_name,department,project,salary FROM projectlog WHERE project IN 
+ (SELECT DISTINCT project FROM projectlog WHERE Salary>60000);
+ -- Show employees whose city is among cities where employees from multiple departments(more than one) live.
+ SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN ( SELECT city
+  FROM projectlog GROUP BY city HAVING COUNT(DISTINCT department)>1);
