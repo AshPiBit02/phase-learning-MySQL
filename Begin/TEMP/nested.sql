@@ -121,3 +121,4 @@ SELECT * FROM employeelog WHERE salary>(SELECT AVG(salary) FROM employeelog );
 -- Find employees who live in a city where the number of employees in that city is greater than the number of employees in their department
 SELECT e.emp_id,e.emp_name,e.city,e.department FROM employeelog e WHERE (SELECT COUNT(*)
  FROM employeelog WHERE city=e.city)>(SELECT COUNT(*) FROM employeelog WHERE department=e.department);
+ 

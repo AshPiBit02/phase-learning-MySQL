@@ -25,7 +25,7 @@ INSERT INTO Staffs (EmpID, FirstName, LastName, Age, Salary, Department) VALUES
 (103, 'Charlie', 'Gurung', 26, 55000.00, 'Finance'),
 (104, 'Diana', 'Karki', 30, 62000.00, 'IT');
 --Rename the table Staff to worker temporarily as select FirstName, Salary;
-SELECT FirstName,Salary FROM Staffs AS Workers;4
+SELECT FirstName,Salary FROM Staffs AS Workers;
 
 -- Rename the column salary to Income in a query
 SELECT EmpID,FirstName,LastName,Age,Salary AS Income, Department FROM Staffs;
