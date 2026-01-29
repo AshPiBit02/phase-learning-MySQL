@@ -56,7 +56,7 @@ SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN (SELECT DIS
  -- Show employees whose city is among cities where employees from multiple departments(more than one) live.
  SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN ( SELECT city
   FROM projectlog GROUP BY city HAVING COUNT(DISTINCT department)>1);
-  
+
 CREATE TABLE TrainingLog (
     emp_id INT,
     course_name VARCHAR(50),
@@ -72,3 +72,18 @@ INSERT INTO TrainingLog VALUES
 (206, 'Finance Audit', 2023),
 (207, 'Taxation Law', 2025),
 (208, 'HR Compliance', 2024);
+-- Employees from projectLog whose emp_id is in TrainingLog For 2025 courses
+SELECT emp_id,emp_name FROM projectlog WHERE emp_id IN (SELECT emp_id 
+FROM traininglog WHERE completion_year IN ('2025'));
+-- Employees from projectlog whose emp_id is in TrainingLog for Finance/Tax related courses.
+SELECT emp_id,emp_name FROM projectlog WHERE emp_id IN (SELECT emp_id FROM traininglog 
+WHERE course_name LIKE '%Finance%' OR course_name LIKE '%Tax%');
+-- Employees from projectlog whose emp_id is not in TrainingLog for 2024
+SELECT emp_id,emp_name FROM projectlog WHERE emp_id NOT IN (SELECT emp_id 
+FROM traininglog WHERE completion_year IN ('2024'));
+-- Employees from projectlog whose emp_id is in TrainingLog for Machine Learining or Data Analytics
+SELECT emp_id,emp_name FROM projectlog WHERE emp_id IN (SELECT emp_id FROM traininglog 
+WHERE course_name IN ('Machine Learning','Data Analytics'));
+-- Employees from projectLog whose salary is in the set of salaries of employees trained in 2025
+SELECT emp_id,emp_name,salary FROM projectlog WHERE emp_id IN (SELECT emp_id 
+FROM traininglog WHERE completion_year IN ('2025'));
