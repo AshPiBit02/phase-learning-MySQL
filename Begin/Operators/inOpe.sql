@@ -56,3 +56,19 @@ SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN (SELECT DIS
  -- Show employees whose city is among cities where employees from multiple departments(more than one) live.
  SELECT emp_id,emp_name,department,city FROM projectlog WHERE city IN ( SELECT city
   FROM projectlog GROUP BY city HAVING COUNT(DISTINCT department)>1);
+  
+CREATE TABLE TrainingLog (
+    emp_id INT,
+    course_name VARCHAR(50),
+    completion_year INT,
+    PRIMARY KEY (emp_id, course_name)
+);
+INSERT INTO TrainingLog VALUES
+(201, 'Leadership', 2024),
+(202, 'RecruitmentTech', 2025),
+(203, 'Web Security', 2025),
+(204, 'Data Analytics', 2024),
+(205, 'Machine Learning', 2025),
+(206, 'Finance Audit', 2023),
+(207, 'Taxation Law', 2025),
+(208, 'HR Compliance', 2024);
