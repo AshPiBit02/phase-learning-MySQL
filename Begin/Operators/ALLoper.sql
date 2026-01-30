@@ -36,3 +36,14 @@ SELECT product_id,product_name,price FROM products WHERE price > ALL
   AND p.price > ALL (SELECT price FROM products WHERE product_id IN 
   (SELECT product_id from orders WHERE order_year =2024));
 --   Find products whose price is equal to ALL prices of products in the Furniture category
+SELECT product_id,product_name,category,price FROM products WHERE price = ALL
+ (SELECT price FROM products WHERE category='Furniture');
+ -- List products whose price is not equal to ALL prices in the electronics category
+ SELECT product_id,product_name,price,category FROM products WHERE price <> ALL
+  (SELECT price FROM products WHERE category='Electronics');
+  --Show products whose product_id matches ALL product_id values ordered in 2025
+  SELECT product_id,product_name,category FROM products WHERE product_id = ALL
+   (SELECT product_id FROM orders WHERE order_year=2025);
+   -- Find products whose price is greater than ALL prices of products with quntity > 3;
+   SELECT product_id,product_name,price FROM products WHERE price > ALL
+    (SELECT price FROM products WHERE product_id IN (SELECT product_id FROM orders WHERE quantity>3));
