@@ -47,3 +47,19 @@ SELECT product_id,product_name,category,price FROM products WHERE price = ALL
    -- Find products whose price is greater than ALL prices of products with quntity > 3;
    SELECT product_id,product_name,price FROM products WHERE price > ALL
     (SELECT price FROM products WHERE product_id IN (SELECT product_id FROM orders WHERE quantity>3));
+    -- Display products whose category matches ALL categories of products ordered in 2025
+    SELECT product_id,product_name,category FROM products WHERE category = ALL
+     (SELECT category FROM products WHERE product_id IN (SELECT product_id FROM orders WHERE order_year=2025));
+     -- Find products whose price is less than ALL prices of products ordered in both 2024 and 2025
+     SELECT product_id,product_name,price FROM products WHERE price < ALL
+      (SELECT price FROM products WHERE product_id IN (SELECT product_id FROM orders WHERE order_year IN (2025,2024)));
+      -- Show products whose product_id is equal to ALL product_id values of order with quantity =1
+      SELECT product_id,product_name FROM products WHERE product_id = ALL (SELECT product_id FROM orders WHERE quantity = 1);
+      -- List products whose price is greater than ALL prices of products not in Electronics category
+      SELECT product_id,product_name,price FROM products WHERE price > 
+      ALL (SELECT price FROM products WHERE category NOT IN ('Electronics'));
+      -- Find products whose price is less than ALL prices of products ordered in 2025 with quantity >=3
+      SELECT product_id,product_name,price FROM products WHERE price < ALL 
+      (SELECT price FROM products WHERE product_id IN (SELECT product_id FROM orders
+       WHERE order_year=2025 AND quantity>=3) );
+
