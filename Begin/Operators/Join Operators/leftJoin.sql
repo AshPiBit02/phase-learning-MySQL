@@ -26,4 +26,14 @@ LEFT JOIN venues v ON sv.venue_id=v.venue_id;
 -- List all venues and the sessions hosted there 
 SELECT v.venue_name,v.city,ses.session_title FROM venues v LEFT JOIN session_venues sv ON 
 v.venue_id=sv.venue_id LEFT JOIN sessions ses ON sv.session_id=ses.session_id;
--- 
+-- List all speakers and the topics of their sessions.
+
+-- List all venues and the speakers presenting there.
+
+-- List all speakers and the number of sessioins they are assigned to.
+
+-- List all sessions and the professors assigned to them.
+
+-- List all speakers and the professors teaching their sessions.
+
+
