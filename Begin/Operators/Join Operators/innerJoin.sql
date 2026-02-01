@@ -31,3 +31,24 @@ SELECT b.title,a.author_name,b.year_published FROM authors a INNER JOIN books b 
    SELECT a.author_name FROM authors a INNER JOIN books b ON a.author_id=b.author_id INNER JOIN
    library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id
    GROUP BY a.author_name HAVING COUNT(DISTINCT lb.library_id)>1 ;
+   -- List all authors and the total number of books they have written that are stored in libraries
+   SELECT a.author_name,COUNT(b.book_id) AS total_books_in_libraries FROM authors a INNER JOIN books b ON a.author_id=b.author_id 
+   INNER JOIN library_books lb ON b.book_id=lb.book_id GROUP BY a.author_name;
+   -- Show each library along with the count of books it holds
+   SELECT l.library_name,COUNT(lb.book_id) AS total_books FROM libraries l INNER JOIN library_books lb 
+   ON l.library_id=lb.library_id GROUP BY lb.library_id,l.library_name;-- l.library_name(optional for this scenario helps when multiple libraries have same name)
+-- Find all books along with their author names and the year published, but only for libraries in Kathmandu
+SELECT b.title,a.author_name,b.year_published FROM authors a INNER JOIN books b ON a.author_id=b.author_id
+INNER JOIN library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id WHERE
+l.city NOT IN ('Kathmandu'); 
+-- Display authors whose books are stored in libraries outside Nepal
+SELECT DISTINCT a.author_name FROM authors a INNER JOIN books b ON a.author_id=b.author_id
+INNER JOIN library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id WHERE
+l.city NOT IN ('Kathmandu','Pokhara'); 
+-- List all libraries and the titles of books published before 2023 that they contain.
+SELECT b.title,l.library_name,b.year_published FROM books b INNER JOIN library_books lb ON 
+b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id WHERE b.year_published<2023;
+-- Show authors and their books that are stored in more than one city
+SELECT a.author_name,b.title,COUNT(b.book_id) AS book_count FROM authors a INNER JOIN books b ON
+a.author_id=b.author_id INNER JOIN library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l
+ON lb.library_id=l.library_id GROUP BY a.author_name,b.title HAVING COUNT(DISTINCT l.city)>1;
