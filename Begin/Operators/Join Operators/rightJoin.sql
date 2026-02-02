@@ -25,3 +25,19 @@ SELECT v.venue_name,v.city,s.speaker_name FROM venues v
 RIGHT JOIN session_venues vs ON v.venue_id=vs.venue_id
 RIGHT JOIN speaker_sessions ss ON vs.session_id=ss.session_id
 RIGHT JOIN speakers s ON ss.speaker_id=s.speaker_id;
+-- List all sessions and the number of speakers assigned to them.
+SELECT ses.session_id,ses.session_title,COUNT(DISTINCT ss.speaker_id) AS
+ speaker_count FROM sessions ses RIGHT JOIN speaker_sessions ss 
+ ON ses.session_id=ss.session_id GROUP BY ses.session_id,ses.session_title;
+ -- List all venues and the topics of sessions hosted there.
+ SELECT v.venue_name,ses.session_title FROM venues v 
+LEFT JOIN session_venues sv ON v.venue_id=sv.venue_id
+LEFT JOIN sessions ses ON sv.session_id=ses.session_id;
+-- List all sessions and the cities where they are hosted.
+SELECT ses.session_title,v.city FROM sessions ses
+RIGHT JOIN session_venues sv ON ses.session_id=sv.session_id
+RIGHT JOIN venues v ON sv.venue_id=v.venue_id;
+-- List all sessions and the speakers, even if some sessions are unassigned.
+SELECT ses.session_id,ses.session_title,s.speaker_name FROM sessions ses
+RIGHT JOIN speaker_sessions ss ON ses.session_id=ss.session_id
+RIGHT JOIN speakers s ON ss.speaker_id=s.speaker_id;
