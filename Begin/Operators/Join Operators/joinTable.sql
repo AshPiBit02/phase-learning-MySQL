@@ -105,4 +105,81 @@ INSERT INTO Session_Venues (session_id, venue_id) VALUES
 (102, 202),  -- Global Trade Trends → Delhi
 (103, 203),  -- Robotics in Action → London
 (104, 204),  -- Cybersecurity 2026 → New York
-(105, 205);  -- Green Energy → Madrid
+(105, 205);  -- Green Energy → 
+
+CREATE DATABASE Agriculture;
+USE Agriculture;
+
+CREATE TABLE Farmers (
+  farmer_id VARCHAR(5) PRIMARY KEY,
+  farmer_name VARCHAR(50),
+  crop VARCHAR(50)
+);
+
+CREATE TABLE Market_Stalls (
+  stall_id VARCHAR(5) PRIMARY KEY,
+  stall_name VARCHAR(50),
+  farmer_id VARCHAR(5)
+);
+
+INSERT INTO Farmers VALUES
+('F1','Ram','Rice'),
+('F2','Sita','Maize'),
+('F3','Hari','Wheat'),
+('F4','Gopal',NULL);
+
+INSERT INTO Market_Stalls VALUES
+('S1','Green Corner','F1'),
+('S2','Fresh Hub','F2'),
+('S3','Organic Mart',NULL),
+('S4','Agro Point','F5');
+CREATE DATABASE LibrarySystem;
+USE LibrarySystem;
+
+CREATE TABLE Libraries (
+  lib_id VARCHAR(5) PRIMARY KEY,
+  library_name VARCHAR(50),
+  city VARCHAR(50)
+);
+
+CREATE TABLE Book_Donations (
+  donation_id VARCHAR(5) PRIMARY KEY,
+  donor_name VARCHAR(50),
+  lib_id VARCHAR(5)
+);
+
+INSERT INTO Libraries VALUES
+('L1','City Central','Kathmandu'),
+('L2','Knowledge Hub','Pokhara'),
+('L3','Wisdom House','Delhi');
+
+INSERT INTO Book_Donations VALUES
+('D1','Priya','L1'),
+('D2','John','L2'),
+('D3','Carlos',NULL),
+('D4','Sophia','L4');
+CREATE DATABASE MusicFest;
+USE MusicFest;
+
+CREATE TABLE Musicians (
+  musician_id VARCHAR(5) PRIMARY KEY,
+  musician_name VARCHAR(50),
+  instrument VARCHAR(50)
+);
+
+CREATE TABLE Concerts (
+  concert_id VARCHAR(5) PRIMARY KEY,
+  concert_name VARCHAR(50),
+  musician_id VARCHAR(5)
+);
+
+INSERT INTO Musicians VALUES
+('M1','Aashish','Guitar'),
+('M2','Mei','Violin'),
+('M3','Carlos','Drums');
+
+INSERT INTO Concerts VALUES
+('C1','Rock Night','M1'),
+('C2','Jazz Evening','M2'),
+('C3','Folk Festival',NULL),
+('C4','Fusion Fiesta','M4');
