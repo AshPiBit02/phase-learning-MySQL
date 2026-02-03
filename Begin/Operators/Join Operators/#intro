@@ -1,0 +1,8 @@
+A join in SQL is used to combine rows from two or more tables based on a related column between them
+This allows users to retrieve data from multiple tables in a single query
+Some of the join operation in SQL are:
+i. INNER JOIN
+ii. LEFT JOIN(LEFT OUTER JOIN)
+iii. RIGHT JOIN(RIGHT OUTER JOIN)
+iv. FULL JOIN(FULL OUTER JOIN)
+v. CROSS JOIN
