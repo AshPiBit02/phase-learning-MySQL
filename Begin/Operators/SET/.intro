@@ -1,0 +1,8 @@
+#SET Operators
+- allows to combine the results of multiple queries
+- these Operators are based on the set theory of mathematics.
+- SQL provide following set Operators:
+    - UNION
+    - INTERSECT
+    - EXPECT/MINUS(i.e. Set difference)
+    
