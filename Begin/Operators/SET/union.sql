@@ -21,3 +21,10 @@ SELECT * FROM  international_tourism WHERE category IN ('Heritage');
 -- List all destinations with visitors greater than 10,000 for both tables.
 SELECT destination FROM  local_tourism WHERE visitors>10000 UNION
 SELECT destination FROM  international_tourism WHERE visitors>10000;
+-- Find the distinct set of categories across both tables.
+SELECT category FROM local_tourism UNION
+ SELECT category FROM international_tourism;
+ -- Count of unique destinations
+ SELECT COUNT(*) AS unique_destinations FROM (SELECT destination FROM
+  local_tourism UNION SELECT destination FROM international_tourism)
+ AS combined_tourism;
