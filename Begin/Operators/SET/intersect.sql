@@ -31,8 +31,10 @@
   FROM local_tourism l INNER JOIN international_tourism i ON l.destination=i.destination; 
   -- Compare INTERSECT with UNION: write a query to show overlapping destinations using INTERSECT,
   -- and then show all distinct destinations using UNION.
-  SELECT destination FROM local_tourism INTERSECT SELECT destination FROM international_tourism;
-  SELECT destination FROM local_tourism UNION SELECT destination FROM international_tourism ;
+  SELECT destination FROM local_tourism INTERSECT 
+  SELECT destination FROM international_tourism;
+  SELECT destination FROM local_tourism UNION 
+  SELECT destination FROM international_tourism ;
   
 
 
