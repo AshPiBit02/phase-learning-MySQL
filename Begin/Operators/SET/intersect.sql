@@ -20,4 +20,19 @@
   -- Find destinations that overlap and also belong to the category 'Heritage'.
    SELECT category FROM local_tourism WHERE category IN ('Heritage') INTERSECT 
   SELECT category FROM international_tourism WHERE category IN ('Heritage') ;
+  -- Find destinations that overlap and have fewer than 15000 visitors 
+   SELECT destination FROM local_tourism WHERE visitors<15000 INTERSECT 
+  SELECT destination FROM international_tourism WHERE visitors<15000 ;
+  -- List overlapping destinations in alphabetical order.
+  SELECT destination FROM local_tourism INTERSECT 
+  SELECT destination FROM international_tourism ORDER BY destination ASC;
+  -- Find overlapping destinations and show their visitor counts from both tabels side by side.
+  SELECT l.destination,l.visitors AS local_visitors,i.visitors AS international_visitors
+  FROM local_tourism l INNER JOIN international_tourism i ON l.destination=i.destination; 
+  -- Compare INTERSECT with UNION: write a query to show overlapping destinations using INTERSECT,
+  -- and then show all distinct destinations using UNION.
+  SELECT destination FROM local_tourism INTERSECT SELECT destination FROM international_tourism;
+  SELECT destination FROM local_tourism UNION SELECT destination FROM international_tourism ;
+  
+
 
