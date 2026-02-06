@@ -1,0 +1,6 @@
+# Views
+-- a virtual table in a database
+-- based on the result of a SELECT query and does not store data itself
+-- pulls data dynamically from the underlaying tables whenever accessed
+-- provides a layer of abstraction for data security by restricting access to certain columns or rows
+-- Syntax: CREATE VIEW view_name AS SELECT column1,column2,.. FROM table_name WHERE condition;
