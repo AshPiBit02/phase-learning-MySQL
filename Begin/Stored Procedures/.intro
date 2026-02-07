@@ -1,0 +1,23 @@
+# Stored Procedures
+- a precomplied set of SQL statements stored in the database.
+- allows to perform specific operations, including complex business logic, in a single call.
+- Syntax: DELIMETER $$ CREATE PROCEDURE procedure_name(paramterers) BEGIN
+          sql_satements
+          END $$
+          DELIMETER;
+
+
+
+In MySQL, a delimiter is a character(or set of characters) that tells MySQL where one SQL statement ends.
+When one write stored procedures, functions, triggers, or events, the SQL code inside them already uses(;).
+So, MySQL gets confused and thinks the statement ends to early. To avoid this, we change the delimiter temporarily.
+Commonly used delimeters are $$,//,##.
+
+# Key Features
+  - Reusability
+  - Improved Performance
+  - Reduced Network Traffic
+  - Security
+  - Encapsulation
+  - Parameterization
+  
