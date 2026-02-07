@@ -1,0 +1,42 @@
+CREATE DATABASE CampusStoreDB;
+USE CampusStoreDB;
+CREATE TABLE Orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    product_name VARCHAR(50),
+    quantity INT,
+    price DECIMAL(10,2),
+    order_date DATE,
+    city VARCHAR(50)
+);
+INSERT INTO Orders (customer_name, product_name, quantity, price, order_date, city) VALUES
+('Sita', 'Rice', 2, 1200.00, '2023-01-15', 'Pokhara'),
+('Ram', 'Sugar', 5, 500.00, '2023-02-10', 'Kathmandu'),
+('Hari', 'Milk', 10, 300.00, '2023-03-05', 'Butwal'),
+('Gita', 'Oil', 3, 1500.00, '2023-04-12', 'Pokhara'),
+('Maya', 'Salt', 8, 200.00, '2023-05-20', 'Chitwan'),
+('Krishna', 'Tea', 4, 800.00, '2023-06-25', 'Kathmandu'),
+('Bishal', 'Coffee', 6, 1800.00, '2023-07-02', 'Pokhara'),
+('Anita', 'Biscuits', 12, 600.00, '2023-07-15', 'Butwal'),
+('Ramesh', 'Juice', 7, 1400.00, '2023-08-01', 'Chitwan'),
+('Sunita', 'Bread', 15, 750.00, '2023-08-20', 'Kathmandu'),
+('Dipak', 'Butter', 2, 500.00, '2023-09-05', 'Pokhara'),
+('Kiran', 'Cheese', 3, 900.00, '2023-09-10', 'Butwal'),
+('Suman', 'Eggs', 20, 400.00, '2023-09-15', 'Chitwan'),
+('Prakash', 'Rice', 5, 3000.00, '2023-09-25', 'Kathmandu'),
+('Laxmi', 'Sugar', 2, 200.00, '2023-10-01', 'Pokhara'),
+('Manoj', 'Milk', 8, 240.00, '2023-10-05', 'Butwal'),
+('Sabina', 'Oil', 1, 500.00, '2023-10-10', 'Chitwan'),
+('Rajesh', 'Tea', 10, 2000.00, '2023-10-15', 'Kathmandu'),
+('Nisha', 'Coffee', 2, 600.00, '2023-10-20', 'Pokhara'),
+('Deepa', 'Biscuits', 5, 250.00, '2023-10-25', 'Butwal'),
+('Santosh', 'Juice', 4, 800.00, '2023-11-01', 'Chitwan'),
+('Rita', 'Bread', 6, 300.00, '2023-11-05', 'Kathmandu'),
+('Amit', 'Butter', 3, 750.00, '2023-11-10', 'Pokhara'),
+('Sujata', 'Cheese', 1, 300.00, '2023-11-15', 'Butwal'),
+('Keshav', 'Eggs', 12, 240.00, '2023-11-20', 'Chitwan'),
+('Sarita', 'Rice', 7, 4200.00, '2023-11-25', 'Kathmandu'),
+('Binod', 'Sugar', 9, 900.00, '2023-12-01', 'Pokhara'),
+('Meena', 'Milk', 15, 450.00, '2023-12-05', 'Butwal'),
+('Arjun', 'Oil', 2, 1000.00, '2023-12-10', 'Chitwan'),
+('Kamal', 'Tea', 6, 1200.00, '2023-12-15', 'Kathmandu');
