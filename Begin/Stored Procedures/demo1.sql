@@ -1,4 +1,5 @@
 USE CampusStoreDB;
+USE CampusStoreDB;
 -- 1. Fetch all orders place by Sita
 DELIMITER $$
 CREATE PROCEDURE Order_by_Name(IN cust_name VARCHAR(50))
@@ -18,8 +19,21 @@ DELIMITER ;
 CALL order_By_quantity(10);
 
 --3.Get the total number of orders from Pokhara.
-
+DELIMITER $$
+CREATE PROCEDURE order_by_place(IN input_place varchar(50))
+BEGIN
+SELECT * FROM orders WHERE city IN ('Pokhara');
+END $$
+DELIMITER ;
+CALL order_by_place('Pokhara');
 -- 4. Show all orders placed in September 2023.
+DELIMITER $$
+CREATE PROCEDURE order_by_date(IN input_date DATE)
+BEGIN
+SELECT * FROM orders WHERE order_date=input_date;
+END $$
+DELIMITER ;
+CALL order_by_date('2023-09-03');
 
 -- 5. Find the highest priced product ordered.
 
