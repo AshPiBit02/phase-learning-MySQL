@@ -169,20 +169,52 @@ CALL sort_in_DESC_by_date();
 
 -- 21. Get the sum of sales for each city.
 DELIMITER $$
-CREATE PROCEDURE 
+CREATE PROCEDURE sales_according_to_city()
 BEGIN
-SELECT
+SELECT city,SUM(quantity*price) AS total_sale FROM orders GROUP BY city;
 END $$
 DELIMITER ;
-CALL
+CALL sales_according_to_city();
 
 -- 22. Find customers who ordered Butter or Cheese.
+DELIMITER $$
+CREATE PROCEDURE order_by_products(IN input_product1 VARCHAR(50),IN input_product2 VARCHAR(50))
+BEGIN
+SELECT * FROM orders WHERE product_name IN (input_product1,input_product2);
+END $$
+DELIMITER ;
+CALL order_by_products('Butter','Cheese');
 
 -- 23. Show orders where price BETWEEN 200 and 1000.
+DELIMITER $$
+CREATE PROCEDURE order_by_price_range(IN input_start DECIMAL ,input_end DECIMAL)
+BEGIN
+SELECT * FROM orders WHERE price>input_start AND price<input_end;
+END $$
+DELIMITER ;
+CALL order_by_price_range(200,1000); 
 
 -- 24. List distinct product names ordered.
+DROP PROCEDURE distinct_product;
+DELIMITER $$
+CREATE PROCEDURE distinct_product()
+BEGIN
+    SELECT DISTINCT product_name
+    FROM orders;
+END $$
+DELIMITER ;
+
+-- Call the procedure
+CALL distinct_product();
 
 -- 25. Find customers who ordered on 2023-12-15.
+DELIMITER $$
+CREATE PROCEDURE order_by_date(IN input_date DATE)
+BEGIN
+SELECT * FROM orders WHERE order_date=input_date;
+END $$
+DELIMITER ;
+CALL order_by_date('2023-12-15');
 
 
 
