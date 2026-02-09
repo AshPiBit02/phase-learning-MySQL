@@ -1,5 +1,0 @@
-# DATE
-- A data type in MySQL that stores calendar dates in the format YYYY-MM-DD.
-- Range: FROM 1000-01-01 to 9999-12-31.
-- Storage: Takes 3 bytes.
-- storing dates,filtering records by specific dates or ranges.
