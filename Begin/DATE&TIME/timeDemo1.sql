@@ -1,28 +1,29 @@
-CREATE TABLE DailyRoutine (
-    routine_id INT AUTO_INCREMENT PRIMARY KEY,
-    activity VARCHAR(100),
-    start_time TIME,
-    end_time TIME,
-    city VARCHAR(50)
-);
-INSERT INTO DailyRoutine (activity, start_time, end_time, city) VALUES
-('Morning Exercise', '05:30:00', '06:30:00', 'Kathmandu'),
-('Breakfast', '07:00:00', '07:30:00', 'Pokhara'),
-('Office Work', '09:00:00', '17:00:00', 'Butwal'),
-('Lunch Break', '12:30:00', '13:15:00', 'Chitwan'),
-('Team Meeting', '10:00:00', '11:00:00', 'Kathmandu'),
-('Coding Session', '14:00:00', '16:00:00', 'Pokhara'),
-('Evening Walk', '18:00:00', '18:45:00', 'Butwal'),
-('Dinner', '20:00:00', '20:45:00', 'Chitwan'),
-('Late Night Study', '22:00:00', '23:30:00', 'Kathmandu'),
-('Meditation', '06:00:00', '06:20:00', 'Pokhara'),
-('Shopping', '17:30:00', '18:30:00', 'Butwal'),
-('Movie Time', '21:00:00', '23:00:00', 'Chitwan'),
-('Breakfast', '08:00:00', '08:30:00', 'Kathmandu'),
-('Workshop', '11:00:00', '13:00:00', 'Pokhara'),
-('Gaming', '19:00:00', '21:00:00', 'Butwal'),
-('Reading', '20:30:00', '22:00:00', 'Chitwan'),
-('Yoga', '05:00:00', '05:45:00', 'Kathmandu'),
-('Coffee Break', '15:30:00', '15:45:00', 'Pokhara'),
-('Presentation', '09:30:00', '10:30:00', 'Butwal'),
-('Networking Event', '18:30:00', '20:00:00', 'Chitwan');
+-- 1. Fetch all activities that start before 06:00:00
+SELECT activity FROM dailyroutine WHERE HOUR(start_time)<6;
+-- 2. Find activities that end after 20:00:00.
+SELECT activity FROM dailyroutine WHERE HOUR(end_time)>20;
+-- 3. Show activities that happen entirely in the morning 
+SELECT activity FROM dailyroutine WHERE HOUR(start_time)<12 AND HOUR(end_time)<12;
+-- 4. List activities that overlap with lunch break;
+SELECT activity
+FROM DailyRoutine
+WHERE start_time >= (SELECT start_time FROM DailyRoutine WHERE activity = 'Lunch Break')
+  AND end_time   <= (SELECT end_time   FROM DailyRoutine WHERE activity = 'Lunch Break');
+-- 5. Find the longest duriation activity 
+SELECT activity,TIMEDIFF(end_time,start_time) 
+AS Duration FROM dailyroutine ORDER BY Duration DESC LIMIT 1; 
+
+-- 6. Find the shortes duriation activity 
+SELECT activity,TIMEDIFF(end_time,start_time) 
+AS Duration FROM dailyroutine ORDER BY Duration ASC LIMIT 1; 
+-- 7. Show activites that start in the afternoon(12:00 to 21:00)
+SELECT activity FROM dailyroutine WHERE HOUR(start_time) BETWEEN 12 AND 21; 
+-- 8. Find activities time diff is more than 2 hours.
+SELECT activity FROM dailyroutine WHERE HOUR(TIMEDIFF(end_time,start_time))>2;
+-- 9. Show activities that start at the same time in differenct cities.
+SELECT start_time, GROUP_CONCAT(activity,'(',city,')') AS activities,
+COUNT(DISTINCT city) AS city_count FROM dailyroutine GROUP BY start_time HAVING city_count>1;
+-- 10. Find activities that end exactly at 23:00:00
+SELECT activity FROM dailyroutine WHERE end_time='23:00:00';
+-- 11. Show activites with start_time later than their end_time( to test invalid data)
+SELECT activity,start_time,end_time,TIMEDIFF(end_time,start_time) AS pos_valid_neg_invalid FROM dailyroutine;
