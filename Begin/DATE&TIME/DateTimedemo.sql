@@ -18,4 +18,13 @@ SELECT event_name FROM eventschedule WHERE HOUR(start_time) BETWEEN 12 AND 17;
 SELECT event_name FROM eventschedule WHERE HOUR(end_time)>20;
 -- 10. Calculate the duration of each event
 SELECT event_name,start_time,end_time,TIMEDIFF(end_time,start_time) AS duration FROM eventschedule;
---
+-- 11. Find the longest duration of each event
+SELECT event_name,TIMEDIFF(end_time,start_time) as duration FROM eventschedule ORDER BY duration DESC LIMIT 1;
+-- 12. find the shortest duration event 
+SELECT event_name,TIMEDIFF(end_time,start_time) as duration FROM eventschedule ORDER BY duration ASC LIMIT 1;
+-- 13. Convert event duration into minutes
+SELECT event_name,TIME_TO_SEC(TIMEDIFF(end_time,start_time))/60 AS duration_min FROM eventschedule;
+-- 14. Show events created in the last 10 days
+SELECT event_name,event_date FROM eventschedule WHERE DATEDIFF(CURDATE(),DATE(created_at))<=10;
+-- 15. Find events scheduled today using
+SELECT event_name FROM eventschedule WHERE event_date=CURDATE();
