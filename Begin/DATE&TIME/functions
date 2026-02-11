@@ -1,0 +1,50 @@
+Functions used in DATE and TIME 
+
+-- DATE Functions
+1. CURDATE() - retuns the current DATE
+2. CURRENT_DATE() - Synonym of CURDATE()
+3. DATE(expr) - extracts the date part of a datetime expression
+4. DATE_ADD(date,INTERVAL expr unit) - Adds an interval to a date where expr can be YEAR,MONTH,or DAY
+5. DATE_DIFF(date1,date2) - retuns the number of days between two dates
+6. DAY(daye)/DAYOFMONTH(date) - retuns the day of the month(1-31)
+7. DAYNAME(date) - retuns the name of the weekday
+8. DAYOFWEEK(date) - retuns the weekday index(1=sunday, 7=saturday)
+9. DAYOFYEAR(date) - retuns the day of the year(1-366)
+10. LAST_DAY(date)  - returns the last day of the month for the given date
+11. MONTH(date) - retuns the month(1-12)
+12. MONTHNAME(date) - retuns the name of the month
+13. YEAR(date) - retuns the year
+14. QUARTER(date) - retuns the quarter of the year(1-4)
+15. TO_DAYS(date) - retuns the number of days since year 0.
+16. FROM_DAYS(number) - retuns date value corresponding to that day count
+
+-- TIME Functions
+1. CURTIME() - retuns the current
+2. CURRENT_TIME() - Synonym for CURTIME()
+3. ADDTIME(expr1,expr2) - add a time interval to a time/datetime.
+4. SUBTIME(expr1,expre2) - subtracts a time interval
+5. SEC_TO_TIME(seconds) - converts second to standard time format
+6. TIME(expr) - extracts the time part of a datetime expression.
+7. TIME_TO_SEC(time) - converts a time value into seconds.
+8. HOUR(time) - retruns the hour(0-23)
+9. MINUTE(time) - returns the minute(0-59)
+10. SECOND(time) - return the second(0-59)
+
+-- Combined DateTime Functions
+1. NOW() - retuns current date and time
+2. CURRENT_TIMESTAMP()- Synonym fo NOW()
+3. LOCALTIME()/LOCALTIMESTAMP()- Synonym for NOW()
+4. UNIX_TIMESTAMP() - returns the Unix timestamp(seconds since 1970-01-01)
+5. FROM_UNIXTIME(unix_timestamp) - converts unix timestamp to date/time
+6. STR_TO_DATE(str,format) - Formats a date/time according to a format string.
+7. EXTRACT(unit FROM date) - extracts a part of a date (year,month,day,etc)
+8. MAKEDATE(year,dayofyear) - creates a date from year and day-of-year.
+9. MAKETIME(hour,minute,second) - creates a time from hour, minute and second
+10. TIMESTAMP(expr) - converts an expression to a timestamp.
+11. TIMESTAMPADD(unit,interval,datetime) - adds an interval to a datetime
+12. TIMESTAMPDIFF(unit,datetime1,datetime2) - retuns the difference between two datetimes in the given unit
+
+-- WEEK Functions
+1. WEEK(date,mode) - returns the week number of a date.
+2. WEEKDAY(date) - returns the weekday index(0(monday)-6(sunday))
+3. WEEKOFYEAR(date) - retuns the week number (1-53) of the year.
