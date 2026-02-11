@@ -1,0 +1,28 @@
+# TCL(Transaction Control Language)
+- a subset of SQL commands used to manage transactions in a relational database.
+- it ensures data integrity by allowing user to save,undo, or mark points within a tansaction.
+- Used to maintain consistency, crash/erroe recovery, partial undo and control isolation
+
+Functions 
+1. COMMIT;
+- saves all changes permanentlu
+2. ROLLBACK;
+- undoes changes since the last COMMIT.
+3. SAVEPOINT;
+- creates a marker to roll back to.
+4. ROLLBACK TO SAVEPOINT;
+- rolls back only to the defined savepoint
+5. SET TRANSACTION
+- defines transaction properties(like isolation level)
+- SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+Example
+
+BEGIN;
+INSERT INTO eventSchedule(event_name,event_date,start_time,end_time,created_at,city)
+VALUES('Test event','2026-01-10','2023-11-25','12:00:00','09:00:00','Kathmandu');
+SAVEPOINT sp1;
+UPDATE eventSchedule SET city='Pokhara' WHERE event_name='Test event';
+ROLLBACK TO sp1; -- undo the update, but kepp the insert
+COMMIT; -- permanently save the insert
+
