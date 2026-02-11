@@ -43,8 +43,20 @@ Functions used in DATE and TIME
 10. TIMESTAMP(expr) - converts an expression to a timestamp.
 11. TIMESTAMPADD(unit,interval,datetime) - adds an interval to a datetime
 12. TIMESTAMPDIFF(unit,datetime1,datetime2) - retuns the difference between two datetimes in the given unit
+13. SYSDATE() - retuns the time at which the function executes.
 
 -- WEEK Functions
 1. WEEK(date,mode) - returns the week number of a date.
 2. WEEKDAY(date) - returns the weekday index(0(monday)-6(sunday))
 3. WEEKOFYEAR(date) - retuns the week number (1-53) of the year.
+
+-- TIMEZONE & System Functions
+1. CONVERT_TZ(dt,from_tz,to_tz) - converts a detetime value from ont time zone to another
+2. UTC_DATE() - returns the current UTC date(UTC is Coordinate Universal Time)
+3. UTC_TIME() - returns the current UTC time.
+4. UTC_TIMESTAMP() - returns the current UTC date and time
+5. GET_FORMAT(DATE|TIME|DATETIME,format-type) - retuns a format string of use with DATE_FORMAT() or STR_TO_DATE().
+
+-- PERIOD Functions
+1. PERIOD_ADD(P,N) - adds N months to a period P(in YYMM or YYYYMM format)
+2. PERIOD_DIFF(P1,P2) - return the number of months between two periods.
