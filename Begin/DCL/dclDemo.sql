@@ -37,4 +37,11 @@ REVOKE DELETE ON librarybooks FROM 'admin1'@'localhost';
 GRANT ALL PRIVILEGES ON libraryBooks TO 'superadmin'@'localhost';
 -- 7. Grant SELECT privilege on only the title and author columns of LibraryBooks to user guest1.
 GRANT SELECT(title,author) ON libraryBooks TO 'guest1'@'localhost';
--- 8. 
+-- 8. Revoke UPDATE privilege from user admin1.
+REVOKE UPDATE ON libraryBooks FROM 'admin1'@'localhost';
+-- 9. Grant SELECT privilege on LibraryBooks to role readers.
+GRANT SELECT ON libraryBooks TO 'readers';
+-- 10. Grant INSERT and UPDATE privileges on LibraryBooks to role editors.
+GRANT INSERT,UPDATE ON librarybooks TO 'editors';
+-- 11. Revoke all privileges from user student1.
+REVOKE ALL PRIVILEGES ON librarybooks FROM 'student1'@'localhost';
