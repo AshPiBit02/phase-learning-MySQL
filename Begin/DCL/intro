@@ -1,0 +1,18 @@
+# Data Control Language
+- a subset of SQL commands used to control access.
+- ensures security, authorization, and restricted access to data.
+- essential in multi-user environments where you need to decide who can do what.
+Uses 
+- to grant privileges(like SELECT, INSERT, UPDATE) to specific users or roles.
+- to revoke preivileges when access should be removed.
+- to enforce data security and prevent unauthorized actions.
+- to manage user roles and responsibilities in large systems.
+Main Commands & Syntax
+1. GRANT - used to give previleges to a user or role.
+Syntax: GRANT SELECT, INSERT ON Students TO 'user1';
+2. REVOKE - used to remove privileges from a user or role.
+Syntax: REVOKE INSERT ON Students FROM 'user1';
+3. DENY
+- Explicitly prevents a user from having a privilege, even if granted elsewhere.
+- Not available in MySQL, but used in SQL Server.
+Syntax: DENY DELETE ON Students TO user1;
