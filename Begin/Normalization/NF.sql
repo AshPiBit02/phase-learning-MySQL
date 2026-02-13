@@ -58,3 +58,43 @@ CREATE TABLE stu_id_phone(
     FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id)
 )
 
+#3NF
+CREATE TABLE stu_coursee(
+    student_id INT,
+    course_id INT,
+    dept_name VARCHAR(30),
+    PRIMARY KEY(student_id,course_id),
+    FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id),
+    FOREIGN KEY(course_id) REFERENCES course_id_name(course_id),
+    FOREIGN KEY(dept_name) REFERENCES dept_prof(dept_name)
+)
+
+
+CREATE TABLE department( -- helps to acqure multiple professor in single department
+    dept_name VARCHAR(30),
+    PRIMARY KEY(dept_name)
+)
+CREATE TABLE professor( -- single department for single professor
+    dept_name VARCHAR(30),
+    professor_name VARCHAR(30),
+    PRIMARY KEY (professor_name),
+    FOREIGN KEY(dept_name) REFERENCES department(dept_name)
+)
+
+CREATE TABLE stu_id_name(
+    student_id INT,
+    student_name VARCHAR(40),
+    PRIMARY KEY(student_id)
+)
+
+CREATE TABLE course_id_name(
+    course_id INT,
+    course_name VARCHAR(30),
+    PRIMARY KEY(course_id)
+)
+
+CREATE TABLE stu_id_phone(
+    student_id INT,
+    phone_number VARCHAR(10),
+    FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id)
+)
