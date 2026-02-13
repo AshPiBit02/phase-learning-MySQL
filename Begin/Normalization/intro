@@ -1,0 +1,33 @@
+# Normalizaton 
+- process of organizing data in a database to reduce redundancy and improve data integrity.
+- a design principle that ensures each piece of data is stored in the most logical place.
+- goal is to make database efficient, consistent, and easier to maintain.
+# Use
+- eliminate redundancy
+- ensures data integrity
+- improves query efficiency
+- simplifies maintenance and reduces chances of inconsistent data.
+# Type:
+1. 1NF
+- atomic, no repeating groups
+- prevents multi-valued columns.
+2. 2NF
+- must be in 1NF first
+- no partial dependency on part of a composite key.
+- removes redundancy in table with compositive keys.
+3. 3NF 
+- must be in 2NF first
+- no transitive dependency(non-key attributes depend only on the key)
+- ensures non-key attributes depend directly on the primary key.
+4. BCNF(Boyce-Codd NF)
+- must be in 3NF
+- every determinant must be a candidate key.
+- stronger version of 3NF, eliminates anomalies.
+5. 4NF
+- must be in BCNF first
+- no multi-valued dependencies.
+- Handles complex relationships with multiple independent attributes.
+6. 5NF 
+- must be in 4NF
+- no join dependency.
+- ensures tables can be reconstructed without redundency.
