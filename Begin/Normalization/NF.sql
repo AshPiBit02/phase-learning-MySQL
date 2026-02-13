@@ -29,6 +29,32 @@ INSERT INTO student1NF VALUES
 (1, 'Aashish', '9812', 'C102', 'OOP', 'Computer Science', 'Dr. Sharma'),
 (2, 'Sita', '9803', 'C103', 'Maths', 'Mathematics', 'Dr. Koirala');
 SELECT * FROM student1nf AS 1NF;
-
 #2NF
-CREATE TABLE 
+CREATE TABLE stu_coursee(
+    student_id INT,
+    course_id INT,
+    dept_name VARCHAR(24),
+    professor_name VARCHAR(30),
+    PRIMARY KEY(student_id,course_id),
+    FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id),
+    FOREIGN KEY(course_id) REFERENCES course_id_name(course_id)
+)
+
+CREATE TABLE stu_id_name(
+    student_id INT,
+    student_name VARCHAR(40),
+    PRIMARY KEY(student_id)
+)
+
+CREATE TABLE course_id_name(
+    course_id INT,
+    course_name VARCHAR(30),
+    PRIMARY KEY(course_id)
+)
+
+CREATE TABLE stu_id_phone(
+    student_id INT,
+    phone_number VARCHAR(10),
+    FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id)
+)
+
