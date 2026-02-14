@@ -1,5 +1,6 @@
 # Advanced Data Types
-- MySQL supports several beyond the basics (INT, VARCHAR DATE)
+- MySQL supports several beyond the basics (INT, VARCHAR, DATE)
+
 1. Advanced Numeric Types
  i. DECIMAL(p,s)/NUMERIC(p,s)
  - extract precision for financial values
@@ -10,3 +11,15 @@
  iv. BOOLEAN/BOOL
  - Alias for TINYTINT(1)
  - used for true/false values.
+
+ 2. Advanced String & Text Types
+  i. TEXT family
+  - TINYTEXT,TEXT,MEDIUMTEXT,LONGTEXT
+  - stores large text (blogs,articles, documents)
+  ii. BLOB family
+  - TINYBOLB, BOLB, MEDIUMBOLB, LONGBOLB
+  - stores binary data(images files, multimedia).
+  iii. ENUM
+  - restrict values to a fixed set (e.g. grades A, B, C, D, F)
+  iv. SET
+  - allows multiple selections from a predefined list (e.g. skills: SQL, Python, ML).
