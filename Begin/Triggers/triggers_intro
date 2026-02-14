@@ -1,0 +1,18 @@
+# TRIGGER
+- a stored program in MySQL that runs automatically when a specific event(INSERT, UPDATE, DELETE) happens on a table 
+- unlike stored procedures, you don't call triggers manually(they fire on their own)
+- use
+# Types
+ i. BEOFRE triggers
+ - runs before the event executes. 
+ - useful for validation or modifying values before saving.
+ ii. AFTER triggers
+ - runs after the event executes.
+ - useful for logging, auditing, or syncing data
+Syntax:
+    CREATE TRIGGER trigger_NAME
+   {BEFORE | AFTER} {INSERT | UPDATE | DELETE} ON table_name 
+   FOR EACH ROW 
+   BEGIN
+   -- SQL statements
+   END;
