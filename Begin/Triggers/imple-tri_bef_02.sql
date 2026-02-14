@@ -125,3 +125,48 @@ VALUES ('TestUser', '', 'test@example.com');
 SELECT * FROM hyper_auth_users;
 UPDATE hyper_auth_users SET is_verified=TRUE WHERE user_id=1;
 SELECT * FROM hyper_auth_logs;
+
+
+CREATE TABLE interstellar_orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    product_name VARCHAR(100),
+    quantity INT,
+    price DECIMAL(10,2),
+    total_amount DECIMAL(12,2),
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE interstellar_orders_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    orderid INT,
+    action VARCHAR(20),
+    details VARCHAR(255),
+    log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TRIGGER transaction_log_insert
+BEFORE INSERT ON interstellar_orders
+FOR EACH ROW 
+BEGIN
+ IF NEW.quantity<1 THEN
+ SET NEW.quantity=1;
+ END IF;
+ SET NEW.total_amount=NEW.quantity*NEW.price;
+ INSERT INTO interstellar_orders_log(orderid,action,details) 
+ VALUES(1007,'INSERT',CONCAT('Order for ',NEW.product_name,' by ',NEW.customer_name));
+ END;
+
+ CREATE TRIGGER transaction_log_update
+AFTER UPDATE ON interstellar_orders
+FOR EACH ROW
+BEGIN
+    INSERT INTO interstellar_orders_log (orderid, action, details)
+    VALUES (
+        NEW.order_id,
+        'UPDATE',
+        CONCAT(
+            'Updated order: ', NEW.product_name,
+            ', new qty = ', NEW.quantity,
+            ', new total = ', NEW.total_amount
+        )
+    );
+END;
