@@ -62,7 +62,6 @@ CREATE TABLE stu_id_phone(
 CREATE TABLE stu_coursee(
     student_id INT,
     course_id INT,
-    dept_name VARCHAR(30),
     PRIMARY KEY(student_id,course_id),
     FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id),
     FOREIGN KEY(course_id) REFERENCES course_id_name(course_id),
@@ -98,3 +97,8 @@ CREATE TABLE stu_id_phone(
     phone_number VARCHAR(10),
     FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id)
 )
+# BCNF
+-- the 3NF table is table is already in BCNF as all the determinant are candidite KEY
+
+# 4NF
+
