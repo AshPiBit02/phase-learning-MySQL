@@ -101,4 +101,23 @@ CREATE TABLE stu_id_phone(
 -- the 3NF table is table is already in BCNF as all the determinant are candidite KEY
 
 # 4NF
+CREATE TABLE StudentHobby ( -- 3NF table
+    student_id INT,
+    hobby VARCHAR(30),
+    phone_no VARCHAR(10),
+    PRIMARY KEY(student_id, hobby,phone_no),
+    FOREIGN KEY(student_id) REFERENCES stu_id_name(student_id)
+);
+CREATE TABLE student_hobby -- 4NF(no multi-valued dependency)
+(
+    student_id INT,
+    hobby VARCHAR(40),
+    PRIMARY KEY(student_id,hobby)
+)
+
+CREATE TABLE Student_phone(  -- no multi-valued dependency
+    student_id INT,
+    phone_no VARCHAR(10),
+    PRIMARY KEY(student_id,phone_no)
+)
 
