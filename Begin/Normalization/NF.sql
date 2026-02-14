@@ -121,3 +121,32 @@ CREATE TABLE Student_phone(  -- no multi-valued dependency
     PRIMARY KEY(student_id,phone_no)
 )
 
+# 5NF
+CREATE TABLE StudentProjectRole ( -- 4NF table
+    student_id INT,
+    project_id INT,
+    role VARCHAR(30),
+    PRIMARY KEY(student_id, project_id, role)
+);
+
+-- Which student works on which project
+CREATE TABLE StudentProject (
+    student_id INT,
+    project_id INT,
+    PRIMARY KEY(student_id, project_id)
+);
+
+-- Which roles a student can take
+CREATE TABLE StudentRole (
+    student_id INT,
+    role VARCHAR(30),
+    PRIMARY KEY(student_id, role)
+);
+
+-- Which roles are valid for a project
+CREATE TABLE ProjectRole (
+    project_id INT,
+    role VARCHAR(30),
+    PRIMARY KEY(project_id, role)
+);
+
