@@ -154,6 +154,14 @@ BEGIN
  INSERT INTO interstellar_orders_log(orderid,action,details) 
  VALUES(1007,'INSERT',CONCAT('Order for ',NEW.product_name,' by ',NEW.customer_name));
  END;
+INSERT INTO interstellar_orders (customer_name, product_name, quantity, price)
+VALUES ('Aashish', 'Laptop', 2, 500.00);
+SELECT * FROM interstellar_orders;
+SELECT * FROM interstellar_orders_log;
+INSERT INTO interstellar_orders (customer_name, product_name, quantity, price)
+VALUES ('Ram', 'Smartphone', 0, 300.00);
+SELECT * FROM interstellar_orders;
+SELECT * FROM interstellar_orders_log;
 
  CREATE TRIGGER transaction_log_update
 AFTER UPDATE ON interstellar_orders
@@ -170,3 +178,26 @@ BEGIN
         )
     );
 END;
+
+UPDATE interstellar_orders
+SET quantity = 5
+WHERE customer_name = 'Aashish';
+
+SELECT * FROM interstellar_orders;
+SELECT * FROM interstellar_orders_log;
+
+CREATE TRIGGER transaction_log_delete
+BEFORE DELETE ON interstellar_orders
+FOR EACH ROW  
+BEGIN
+ INSERT INTO interstellar_orders_log(orderid,action,details)
+  VALUES(OLD.order_id,'DELETE',CONCAT('Delected order: ',OLD.product_name,
+                                      ' by ',OLD.customer_name));
+END;
+
+DELETE FROM interstellar_orders
+WHERE customer_name = 'Ram';
+
+SELECT * FROM interstellar_orders;
+SELECT * FROM interstellar_orders_log;
+
