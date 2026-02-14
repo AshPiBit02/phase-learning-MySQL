@@ -28,3 +28,15 @@
 - stores semi-structured data(nested attributes, arrays).
 - Example: {"name":"Aashish","skills":["SQL","Python","ML"]}
 - use case: flexible schemas, dynamic attributes, API integration.
+
+4. Spatial(GIS) Data Types
+   i. POINT
+   - stores a single coordinate(latitude, longitude)
+   ii. LINESTRING
+   - store paths(roads, routes)
+   iii. POLYGON
+   - store areas(district boundaries, zones)
+   iv. GEOMETRY
+   - general type for Spatial objects.
+   v. GEOMETRYCOLLECTION
+   - stores multiple geometries together.
