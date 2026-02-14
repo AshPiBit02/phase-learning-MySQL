@@ -1,0 +1,12 @@
+# Advanced Data Types
+- MySQL supports several beyond the basics (INT, VARCHAR DATE)
+1. Advanced Numeric Types
+ i. DECIMAL(p,s)/NUMERIC(p,s)
+ - extract precision for financial values
+ ii. BIGINT 
+ - very large integers(IDs,pupulation counts,scientific date)
+ iii. BIT(n)
+ - binary flags or bit fields(eg. multiple true/false states)
+ iv. BOOLEAN/BOOL
+ - Alias for TINYTINT(1)
+ - used for true/false values.
