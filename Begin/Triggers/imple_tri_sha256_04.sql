@@ -1,5 +1,5 @@
 # SECURE HAS Alogorithm
---  Synax: SHA2(str,n); WHERE n=224,256,384,512
+--  Synax: SHA2(str,n); WHERE n=224,256,384,512 fjf
 CREATE TABLE data_db(
     user_id INT PRIMARY KEY AUTO_INCREMENT ,
     user_name VARCHAR(30) UNIQUE NOT NULL,
