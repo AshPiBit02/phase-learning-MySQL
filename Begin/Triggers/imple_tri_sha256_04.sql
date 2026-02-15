@@ -25,3 +25,29 @@ CREATE TABLE logIn_interface(
     user_password VARCHAR(20)
 );
 
+CREATE TRIGGER before_loging
+BEFORE INSERT ON logIn_interface
+FOR EACH ROW
+ BEGIN
+       IF EXISTS(SELECT 1 FROM data_db WHERE user_name=NEW.user_name AND
+               user_password=SHA2(NEW.user_password,256)) THEN
+            INSERT INTO login_log(user_name,LogIn_Status,user_type)
+                     VALUES(NEW.user_name,'Logged','VERIFIED');
+        ELSE
+            INSERT INTO login_log(user_name,LogIn_Status,user_type)
+                     VALUES(NEW.user_name,'Not Logged','Unknown');
+        END IF;
+  END;
+
+INSERT INTO login_interface VALUES('aahsi','ash1234');
+
+INSERT INTO login_interface VALUES('bob','BobSecure!456');
+SELECT * FROM login_log;
+
+
+
+
+             
+
+      
+
