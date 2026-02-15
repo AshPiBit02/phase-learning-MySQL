@@ -12,3 +12,16 @@ VALUES ('alice', SHA2('AlicePass123', 256)),
  ('charlie', SHA2('Charlie789$', 256)),
  ('diana', SHA2('Diana@2026', 256)),
  ('eve', SHA2('EveStrong#321', 256));
+
+CREATE Table login_log(
+    user_name VARCHAR(30),
+    LogIn_Status VARCHAR(15),
+    user_type VARCHAR(15),
+    activity_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE logIn_interface(
+    user_name VARCHAR(30),
+    user_password VARCHAR(20)
+);
+
