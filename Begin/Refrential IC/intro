@@ -1,0 +1,26 @@
+# Integrity Constraints
+- set of rules that are applied on the table or relationships
+- ensure that the overall validity, integrity and consistency
+- mechanism to prevent invalid data entries in the database
+1. Entity Integrity Constraints
+- fundamental concept in relational database 
+- ensures each row(tuple) in a table is uniquely identifiable.
+  i. PRIMARY KEY Constraints
+  ii. UNIQUE KEY Concstraints
+2. Domain Integrity Constraint
+- ensure only the valid domain/range of values can be stored in a column
+- prevent unnecessary manipulation of data at the column level.
+  i. NOT NULL
+  ii. CHECK
+  iii. DEFAULT
+3. Referential Integrity Constraints
+- ensures relationships between tables remain valid
+- prevent invalid references and maintaining data consistency across the database.
+ i. CASCADE UPDATE
+    - if there is some change in primary key of a certain table then changes will be seem
+     automatically in the foreign key on another table regerencing to that primary key.
+     - Syntax: ON UPDATE CASCADE (after the reference)
+ ii. CASCADE DELETE
+    - if primary key row/record of certain table is deleted then it will automatically delete
+     all the records referencing to that primary key.
+     - Syntax: ON DELETE CASCADE (after the reference) 
