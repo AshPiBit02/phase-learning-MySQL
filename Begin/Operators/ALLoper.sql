@@ -24,6 +24,7 @@ INSERT INTO Orders VALUES
 (3, 203, 5, 2025),
 (4, 204, 3, 2025),
 (5, 205, 10, 2024);
+
 --find products whose price is greater than ALL prices in the furniture category
 SELECT product_id,product_name,price FROM products WHERE price > ALL
  (SELECT price FROM products WHERE category='Furniture');
@@ -62,4 +63,5 @@ SELECT product_id,product_name,category,price FROM products WHERE price = ALL
       SELECT product_id,product_name,price FROM products WHERE price < ALL 
       (SELECT price FROM products WHERE product_id IN (SELECT product_id FROM orders
        WHERE order_year=2025 AND quantity>=3) );
+       
 

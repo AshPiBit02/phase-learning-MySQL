@@ -183,3 +183,24 @@ INSERT INTO Concerts VALUES
 ('C2','Jazz Evening','M2'),
 ('C3','Folk Festival',NULL),
 ('C4','Fusion Fiesta','M4');
+
+CREATE DATABASE TeaSnackDB;
+USE TeaSnackDB;
+CREATE TABLE Tea_Flavors (
+  flavor_id VARCHAR(5) PRIMARY KEY,
+  flavor_name VARCHAR(50)
+);
+
+CREATE TABLE Snacks (
+  snack_id VARCHAR(5) PRIMARY KEY,
+  snack_name VARCHAR(50)
+);
+INSERT INTO Tea_Flavors VALUES
+('T1','Green Tea'),
+('T2','Black Tea'),
+('T3','Herbal Tea');
+
+INSERT INTO Snacks VALUES
+('S1','Biscuit'),
+('S2','Samosa'),
+('S3','Muffin');

@@ -52,3 +52,15 @@ b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id WHERE 
 SELECT a.author_name,b.title,COUNT(b.book_id) AS book_count FROM authors a INNER JOIN books b ON
 a.author_id=b.author_id INNER JOIN library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l
 ON lb.library_id=l.library_id GROUP BY a.author_name,b.title HAVING COUNT(DISTINCT l.city)>1;
+--Display the title of books and the libraries that hold them, ordered by year published(newest First)
+SELECT b.title,l.library_name FROM books b INNER JOIN library_books lb ON b.book_id=lb.book_id
+INNER JOIN libraries l ON lb.library_id=l.library_id ORDER BY b.year_published DESC;
+-- Show authors who have books stored in libraries with names containing the word 'House'
+SELECT a.author_name FROM authors a INNER JOIN books b ON a.author_id=b.author_id
+INNER JOIN library_books lb ON b.book_id=lb.book_id INNER JOIN libraries l ON lb.library_id=l.library_id
+WHERE l.library_name LIKE '%House%';
+-- List all libraries and the authors whose books are stored there, grouped  by country of the author.
+SELECT a.author_name,l.library_name,a.country AS author_country FROM libraries l INNER JOIN
+ library_books lb ON l.library_id=lb.library_id INNER JOIN books b ON lb.book_id=b.book_id
+ INNER JOIN authors a ON b.author_id=a.author_id
+ORDER BY a.country,l.library_name;
