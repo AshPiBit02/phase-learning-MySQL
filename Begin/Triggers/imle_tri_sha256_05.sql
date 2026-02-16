@@ -14,7 +14,7 @@ CREATE TABLE signin_interface(new_user_name VARCHAR(20)  NOT NULL
 -- table for activity_log(user_name,user_type,activity,timestamp)
 CREATE TABLE activity_log(user_name VARCHAR(50) NOT NULL,
                             user_type VARCHAR(20) CHECK (user_type IN ('Verified','Unknown','Known','New')),
-                            activity VARCHAR(30) CHECK(activity IN ('LogIn','SignIn','Leave')),
+                            activity VARCHAR(30) CHECK(activity IN ('LogIn','SignIn','Leave','Password Update')),
                             activity_date_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                             ac_description VARCHAR(100) DEFAULT NULL);
 
@@ -23,6 +23,12 @@ CREATE TABLE activity_log(user_name VARCHAR(50) NOT NULL,
     user_name VARCHAR(20),
     user_password VARCHAR(20)
 );
+
+-- table for user_password change
+CREATE TABLE user_password_update(user_name VARCHAR(50) NOT NULL,
+                                    user_password VARCHAR(20) NOT NULL,
+                                    new_user_password VARCHAR(20)  NOT NULL);
+
 
 -- TRIGGERS
 
@@ -108,15 +114,46 @@ INSERT INTO delete_interface(user_name,user_password) VALUES('Sita','wrongpass')
 SELECT * FROM user_data;
 SELECT * FROM activity_log;
 
-    
-            
+
+DELIMITER $$
+CREATE TRIGGER update_password_trig
+AFTER INSERT ON user_password_update
+FOR EACH ROW
+BEGIN
+    -- Check if user exists
+    IF EXISTS(SELECT 1 FROM user_data WHERE user_name = NEW.user_name) THEN 
+        -- Verify old password
+        IF EXISTS(SELECT 1 FROM user_data WHERE user_name = NEW.user_name AND user_password = SHA2(NEW.user_password,256)) THEN
+            -- Update password in user_data
+            UPDATE user_data SET user_password = SHA2(NEW.new_user_password,256) WHERE user_name = NEW.user_name;
+            -- Log successful update
+            INSERT INTO activity_log(user_name,user_type,activity,ac_description)
+            VALUES(NEW.user_name,'Verified','Password Update','Password updated successfully');
+        ELSE
+            -- Old password incorrect
+            INSERT INTO activity_log(user_name,user_type,activity,ac_description)
+            VALUES(NEW.user_name,'Known','Password Update','Incorrect Password try again');
+        END IF;
+    ELSE
+        -- Unknown user
+        INSERT INTO activity_log(user_name,user_type,activity,ac_description)
+        VALUES(NEW.user_name,'Unknown','Password Update',CONCAT('Unknown user ',NEW.user_name,' tried to change password'));
+    END IF;
+END$$
+DELIMITER ;
+
+INSERT INTO user_password_update VALUES('Ra','1234','2356');
+INSERT INTO user_password_update VALUES('laoa','124','2356');
+SELECT * FROM user_password_update;
+SELECT * FROM user_data;
+SELECT * FROM activity_log;
+-- DROP TRIGGER update_password_trig;
 -- DROP Table user_data;
 -- DROP Table log_interface;
+-- DROP TABLE user_password_update;
 -- DROP Table signin_interface;
 -- DROP Table activity_log;
 -- DROP Table delete_interface;
 -- DROP TRIGGER delete_account;
 -- DROP TRIGGER login_trigger;
 -- DROP TRIGGER sigin_trigger;
-        
-        
