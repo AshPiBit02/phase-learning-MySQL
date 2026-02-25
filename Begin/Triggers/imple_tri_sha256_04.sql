@@ -1,5 +1,5 @@
-# SECURE HAS Alogorithm
---  Synax: SHA2(str,n); WHERE n=224,256,384,512 fjf
+# SECURE HASH Alogorithm
+--  Synax: SHA2(str,n); WHERE n=224,256,384,512
 CREATE TABLE data_db(
     user_id INT PRIMARY KEY AUTO_INCREMENT ,
     user_name VARCHAR(30) UNIQUE NOT NULL,
@@ -52,7 +52,7 @@ CREATE TRIGGER signIN
 BEFORE INSERT ON data_db
  FOR EACH ROW 
   BEGIN
-    IF NOT EXISTS(SELECT 1 FROM data_db WHERE user_name<>OLD.user_name) THEN
+    IF NOT EXISTS(SELECT 1 FROM data_db WHERE user_name<>NEW.user_name) THEN
          INSERT INTO login_log(user_name,Activity,user_type)
             VALUES(NEW.user_name,'Signed In','New');
          INSERT INTO data_db(user_name,user_password)
@@ -64,13 +64,17 @@ BEFORE INSERT ON data_db
   END;
 
 INSERT INTO data_db(user_name,user_password) VALUES('max','maxine23');
-INSERT INTO data_db(user_name,user_password) VALUES('max1','maxine23');
+INSERT INTO data_db(user_name,user_password) VALUES('max2','maxine23');
 DELETE FROM data_db WHERE user_id IN (10,11);
 
 SELECT * FROM data_db;
 
 SELECT * FROM login_log;
 
+TRUNCATE TABLE data_db;
+TRUNCATE TABLE login_log;
+DROP TRIGGER signIN;
+DROP TRIGGER before_loging;
 DELETE FROM login_log WHERE user_name IN ('max','max1');
 
 
