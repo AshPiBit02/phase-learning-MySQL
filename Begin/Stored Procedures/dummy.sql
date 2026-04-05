@@ -10,3 +10,13 @@ END $$
 DELIMITER;
 
 CALL product_extracto(50);
+
+DELIMITER $$
+CREATE PROCEDURE total_cost_productt(IN input_product VARCHAR(20))
+BEGIN
+SELECT product_name,(quantity*price) AS total_cost FROM test_01 WHERE product_name = input_product;
+END $$
+DELIMITER;
+
+CALL total_cost_productt("Cookies");
+
